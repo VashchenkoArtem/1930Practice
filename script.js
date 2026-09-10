@@ -5,6 +5,12 @@ const PORT = 8000
 
 const app = express()
 
+
+
+app.get('/kirill', (req, res) => {
+  res.json({ message: 'Hello from Kirill!' })
+})
+        
 app.get('/Ivan', (req, res) => {
     res.status(200).json("Hello! My name is Ivan. I am 13 years old and I am a student in WorldIT Academy.")
 })
@@ -18,5 +24,6 @@ app.get('/Alina', (req, res) => {
 
 
 app.listen(PORT, HOST, () => {
-    console.log(`Listening on http://${HOST}:${PORT}`)
+  console.log(`Listening on http://${HOST}:${PORT}`)
 })
+
