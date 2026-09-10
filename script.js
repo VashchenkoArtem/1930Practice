@@ -5,8 +5,8 @@ const PORT = 8000
 
 const app = express()
 
-app.get('/', (req, res) => {
-    res.status(200).json("Hello World")
+app.get('/Ivan', (req, res) => {
+    res.status(200).json("Hello! My name is Ivan. I am 13 years old and I am a student in WorldIT Academy.")
 })
 
 app.listen(PORT, HOST, () => {
