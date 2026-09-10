@@ -9,6 +9,10 @@ app.get('/', (req, res) => {
     res.status(200).json("Hello World")
 })
 
+app.get('/Bohdan', (req, res) => {
+    res.status(200).json("Bohdan Novikov")
+})
+
 app.listen(PORT, HOST, () => {
     console.log(`Listening on http://${HOST}:${PORT}`)
 })
