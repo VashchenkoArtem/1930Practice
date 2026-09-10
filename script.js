@@ -5,10 +5,11 @@ const PORT = 8000
 
 const app = express()
 
-app.get('/', (req, res) => {
-    
+
+app.get('/kirill', (req, res) => {
+  res.json({ message: 'Hello from Kirill!' })
 })
 
 app.listen(PORT, HOST, () => {
-    console.log(`Listening on http://${HOST}:${PORT}`)
+  console.log(`Listening on http://${HOST}:${PORT}`)
 })
