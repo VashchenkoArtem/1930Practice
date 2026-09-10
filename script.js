@@ -5,7 +5,7 @@ const PORT = 8000
 
 const app = express()
 
-app.get('/', (req, res) => {
+app.get('/Aleksander', (req, res) => {
     res.status(200).json("Hello World")
 })
 
