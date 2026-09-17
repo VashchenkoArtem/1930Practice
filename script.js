@@ -17,6 +17,36 @@ const products = [
         title: 'mouse',
         price: 200,
         count: 10
+    },
+    {
+        id: 2,
+        title: 'monitor',
+        price: 1000,
+        count: 5
+    },
+    {
+        id: 3,
+        title: 'headphones',
+        price: 300,
+        count: 15
+    },
+    {
+        id: 4,
+        title: 'laptop',
+        price: 1500,
+        count: 8
+    },
+    {
+        id: 5,
+        title: 'tablet',
+        price: 800,
+        count: 12
+    },
+    {
+        id: 6,
+        title: 'smartphone',
+        price: 600,
+        count: 20
     }
 ]
 
