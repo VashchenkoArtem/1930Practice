@@ -5,20 +5,35 @@ const PORT = 8000
 
 const app = express()
 
-const products = [
+app.use(express.json())
+
+let products = [
     {
-        id: 0,
+        id: 1,
         title: 'keyboard',
         price: 450, 
         count: 10
     }, 
     {
-        id: 1,
+        id: 2,
         title: 'mouse',
         price: 200,
         count: 10
     }
 ]
+
+function addProduct(product) {
+    return new Promise((resolve) => {
+        setTimeout(() => {
+            products = [
+                ...products, 
+                product
+            ]
+            resolve(product)
+        }, 2000)
+    })
+}
+
 
 app.get('/', (req, res) => {
     res.status(200).json("Hello World")
@@ -66,6 +81,31 @@ app.get(`/products/:id`, (req, res) => {
     
     res.status(200).json(product)
 })
+
+app.post(`/products`, async (req, res) => {
+    const { title, price, count } = req.body
+    
+    if(typeof title !== "string" || !title || !Number.isInteger(price) || price <= 0 || !count){
+        res.status(422).json({
+            message: "Validation error"
+        })
+    }
+    const newProduct = {
+        id: products.length + 1,
+        title: title,
+        price: price,
+        count: count
+    }
+    try {
+        const createdProduct = await addProduct(newProduct)
+        res.status(201).json(createdProduct)
+    } catch (error) {
+        res.status(500).json({
+            message: "Product was not created"
+    })
+    }
+})
+
 
 app.listen(PORT, HOST, () => {
     console.log(`Listening on http://${HOST}:${PORT}`)
