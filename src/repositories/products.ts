@@ -1,3 +1,5 @@
+import type { ProductResponse } from "../transport/dto/responses.ts"
+
 let products = [
     {
         id: 1,
@@ -13,7 +15,7 @@ let products = [
     }
 ]
 
-export function getAllProducts(take){
+export function getAllProducts(take: number){
     if(!take){
         return [
             ...products
@@ -22,17 +24,17 @@ export function getAllProducts(take){
     return products.slice(0, take)
 }
 
-export function createProduct(product){
+export function createProduct(product: ProductResponse){
     return new Promise((resolve, reject) => {
         setTimeout(() => {
             products = [...products, product]
             resolve(product)
         }, 1000 )})
 }
-export function findProductById(id){
+export function findProductById(id: number){
     return products.find((product) => {return product["id"] == id})
 }
 
-export function findProductByTitle(title) {
+export function findProductByTitle(title: string) {
     return products.find((product) => {return product["title"] == title})
 }

@@ -1,6 +1,14 @@
-import { getProducts, findProduct, createNewProduct } from "../services/products.js"
+import { getProducts, findProduct, createNewProduct } from "../../services/products.js"
+import type { ErrorResponse } from "../dto/errors.js"
+import type { CreateProductRequest } from "../dto/requests.js";
+import type { ProductResponse } from "../dto/responses.js";
+import type { Request, Response } from "express";
 
-export function getAllProducts(req, res){
+
+export function getAllProducts(
+    req: Request,
+    res: Response<ProductResponse[] | ErrorResponse>
+){
 
     const { take } = req.query
     if (!take) {
@@ -9,14 +17,21 @@ export function getAllProducts(req, res){
     const takeNum = parseInt(take)
 
     if(!takeNum || !Number.isInteger(takeNum) || takeNum < 0) {
-        res.status(400).json({ok: false, description: "Query parameter 'take' is incorrect!"})
+        res.status(400).json(
+            {
+                message: "Query parameter 'take' is incorrect!"
+            }
+        )
         return
     }
-    const products =  getProducts(take)
-    return res.status(200).json({result: products})
+    const products = getProducts(takeNum)
+    return res.status(200).json(products)
 }
 
-export function getProductById(req, res) {
+export function getProductById(
+    req: Request, 
+    res: Response<ProductResponse | ErrorResponse>
+) {
     const productId = Number(req.params.id);
 
     if (!Number.isInteger(productId) || productId <= 0) {
@@ -36,7 +51,10 @@ export function getProductById(req, res) {
     return res.status(200).json(product);
 }
 
-export async function createProduct(req, res) {
+export async function createProduct(
+    req: Request<{}, {}, CreateProductRequest>, 
+    res: Response<ProductResponse | ErrorResponse>
+) {
     const { title, price, description } = req.body;
 
     if (

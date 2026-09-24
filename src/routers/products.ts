@@ -3,7 +3,7 @@ import {
     getAllProducts,
     getProductById,
     createProduct,
-} from '../handlers/products.js';
+} from '../transport/handlers/products.js';
 
 export const productsRouter = Router()
 
