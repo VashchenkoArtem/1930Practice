@@ -12,5 +12,7 @@ export function createUserRouter(
 
     router.post('/refresh', handler.refresh)
     router.get('/me', ruquireAuth, handler.me)
+
+    router.post('/logout', handler.logout)
     return router
 }

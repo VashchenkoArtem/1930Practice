@@ -13,10 +13,11 @@ import { createAuthService } from "./services/user/user.js"
 import { createUserHandler } from "./transport/handlers/user/user.js"
 import { hashPassword, verifyPassword } from "./lib/password.js"
 import { createUserRouter } from "./transport/routers/auth.js"
-import { signAccessToken, signRefreshToken, verifyAccessToken, verifyRefreshToken } from "./lib/jwt.js"
+import { hashRefreshToken, signAccessToken, signRefreshToken, verifyAccessToken, verifyRefreshToken } from "./lib/jwt.js"
 import cors from "cors"
 import cookieParser from "cookie-parser"
 import { createRequireAuth } from "./transport/middlewares/require-auth.js"
+import { createRefreshSessionRepository } from "./repositories/refresh-session.js"
 
 
 const PORT = 8000
@@ -35,11 +36,14 @@ const categoryService = createCategoryService(categoryRepository);
 const categoryHandlers = createCategoryHandlers(categoryService);
 const categoryRouter = createCategoryRouter(categoryHandlers);
 
+const sessionRepository = createRefreshSessionRepository(db)
 const userRepository = createUserRepository(db)
 const userService = createAuthService(userRepository, 
     { hash: hashPassword, verify: verifyPassword}, 
     { signAccessToken, signRefreshToken},
-    { verifyAccessToken, verifyRefreshToken}
+    { verifyAccessToken, verifyRefreshToken},
+    { hash: hashRefreshToken},
+    sessionRepository,
 )
 
 
