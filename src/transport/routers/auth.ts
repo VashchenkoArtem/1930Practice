@@ -1,6 +1,5 @@
 import { Router, type RequestHandler } from "express";
 import type { UserHandler } from "../handlers/user/user.types";
-import { createRequireAuth } from "../middlewares/require-auth";
 
 export function createUserRouter(
     handler: UserHandler, 
@@ -12,6 +11,6 @@ export function createUserRouter(
     router.post("/login", handler.login)
 
     router.post('/refresh', handler.refresh)
-    router.get('/me', ruquireAuth ,handler.me)
+    router.get('/me', ruquireAuth, handler.me)
     return router
 }

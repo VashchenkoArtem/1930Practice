@@ -16,7 +16,6 @@
     "db:verify": "prisma db verify"
   },
   "dependencies": {
-    "@prisma/orm-postgres": "8.0.0-rc.11",
     "@types/express": "^5.0.6",
     "@types/node": "^26.6.2",
     "argon2": "^0.45.1",
@@ -30,10 +29,12 @@
     "typescript": "^7.0.2"
   },
   "devDependencies": {
-    "@prisma/cli-engine": "^0.6.2",
+    "@prisma/orm-postgres": "^8.0.0-rc.23",
     "@types/cookie-parser": "^1.4.10",
     "@types/cors": "^2.8.19",
     "@types/jsonwebtoken": "^9.0.10",
-    "prisma": "8.0.0-rc.15"
+    "install": "^0.13.0",
+    "npm": "^12.2.2",
+    "prisma": "^8.0.0-rc.33"
   }
 }

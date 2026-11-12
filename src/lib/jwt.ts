@@ -1,8 +1,8 @@
 import "dotenv/config"
 import jwt from "jsonwebtoken"
 
-const secretAccess = process.env.JWT_ACCESS_SECRET
-const secretRefresh = process.env.JWT_REFRESH_SECRET
+const secretAccess = process.env.JWT_ACCESS_SECRET as string
+const secretRefresh = process.env.JWT_REFRESH_SECRET as string
 
 if (!secretAccess) throw new Error("JWT_ACCESS_SECRET is not defined")
 if (!secretRefresh) throw new Error("JWT_REFRESH_SECRET is not defined")
@@ -16,7 +16,7 @@ export function signAccessToken(userId: number): string {
 }
 
 export function signRefreshToken(userId: number): string {
-    return jwt.sign({}, secretRefresh, {
+    return jwt.sign({type: "refresh"}, secretRefresh, {
         algorithm: "HS256",
         subject: String(userId),
         expiresIn: "7d"
