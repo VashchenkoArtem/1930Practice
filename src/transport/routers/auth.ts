@@ -1,18 +1,18 @@
-import { Router, type RequestHandler } from "express";
+import { type RequestHandler, Router } from "express";
 import type { UserHandler } from "../handlers/user/user.types";
 
-export function createUserRouter(
-    handler: UserHandler, 
-    ruquireAuth: RequestHandler
-){
-    const router = Router()
+export function createAuthRouter(
+	handler: UserHandler,
+	requireAuth: RequestHandler,
+) {
+	const router = Router();
 
-    router.post('/register', handler.register)
-    router.post("/login", handler.login)
+	router.post("/register", handler.register);
+	router.post("/login", handler.login);
 
-    router.post('/refresh', handler.refresh)
-    router.get('/me', ruquireAuth, handler.me)
+	router.post("/refresh", handler.refresh);
+	router.get("/me", requireAuth, handler.me);
 
-    router.post('/logout', handler.logout)
-    return router
+	router.post("/logout", handler.logout);
+	return router;
 }
